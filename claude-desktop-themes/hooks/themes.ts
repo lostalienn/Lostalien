@@ -1,0 +1,185 @@
+import type { Theme } from '../types'
+import { THUMBS } from './thumbs'
+
+export const THEMES: Theme[] = [
+  { id: 'claude', name: 'Claude', tagline: "Claude's own colors" },
+  {
+    id: 'sunset-cloud', name: 'Sunset Cloud',
+    tagline: 'A violet dusk, slow clouds, a coral glow rising from the bottom of the window',
+    bg: '#2b2030', text: '#f7e8e2', accent: '#ff8a6b',
+    vars: {
+      'cds-radius': '10px', 'cds-radius-composer': '20px', 'cds-panel-radius': '16px',
+      'cds-shadow-sm': '0 2px 10px rgba(255, 138, 107, .10)',
+      'cds-shadow-md': '0 6px 22px rgba(255, 138, 107, .14)',
+      'cds-shadow-lg': '0 12px 36px rgba(255, 138, 107, .18)',
+    },
+    deco: `<circle cx="200" cy="140" r="60" fill="#ff8a6b" opacity=".18"/>
+<ellipse cx="120" cy="40" rx="26" ry="8" fill="#f7e8e2" opacity=".12"/>`,
+  },
+  {
+    id: 'sakura', name: 'Sakura', tagline: 'Falling petals, round corners, a gentle bounce',
+    bg: '#fff4f6', text: '#4b2a35', accent: '#e0567f',
+    vars: {
+      'cds-radius': '14px', 'cds-radius-composer': '24px', 'cds-panel-radius': '22px',
+      'cds-shadow-sm': '0 2px 10px rgba(224, 86, 127, .10)',
+      'cds-shadow-md': '0 6px 20px rgba(224, 86, 127, .14)',
+      'cds-shadow-lg': '0 12px 32px rgba(224, 86, 127, .18)',
+      'cds-ease-out': 'cubic-bezier(.34, 1.56, .64, 1)', 'cds-dur-base': '.3s',
+    },
+    deco: `<g fill="#f4a6bd"><ellipse cx="100" cy="20" rx="5" ry="3" transform="rotate(30 100 20)"/>
+<ellipse cx="190" cy="90" rx="5" ry="3" transform="rotate(-20 190 90)"/>
+<ellipse cx="130" cy="125" rx="4" ry="2.5" transform="rotate(60 130 125)"/></g>`,
+  },
+  {
+    id: 'terminal', name: 'Terminal', tagline: 'A green phosphor tube: scanlines, glowing text, square corners',
+    bg: '#0a110c', text: '#b9f6c6', accent: '#39e87a', font: "'Cascadia Code', Consolas, monospace",
+    vars: {
+      'cds-radius': '0px', 'cds-radius-composer': '0px', 'cds-panel-radius': '0px',
+      'cds-shadow-sm': '0 0 0 1px rgba(57, 232, 122, .25)',
+      'cds-shadow-md': '0 0 0 1px rgba(57, 232, 122, .35), 0 0 14px rgba(57, 232, 122, .15)',
+      'cds-shadow-lg': '0 0 0 1px rgba(57, 232, 122, .45), 0 0 24px rgba(57, 232, 122, .2)',
+      // (snappy, not 0s: a 0s transition never ends, and parts that wait for its end stay stuck)
+      'cds-dur-base': '40ms', 'cds-dur-slow': '.1s',
+    },
+    deco: `<g opacity=".25">${Array.from({ length: 35 }, (_, i) => `<rect y="${i * 4}" width="240" height="1" fill="#000"/>`).join('')}</g>`,
+  },
+  {
+    id: 'night-sea', name: 'Night Sea', tagline: 'Stars over a slow wave, for long nights of code',
+    bg: '#0f1a2c', text: '#dce6fa', accent: '#5aaeff',
+    vars: {
+      'cds-radius': '8px', 'cds-radius-composer': '16px', 'cds-panel-radius': '14px',
+      'cds-shadow-md': '0 6px 22px rgba(90, 174, 255, .12)',
+      'cds-shadow-lg': '0 12px 34px rgba(90, 174, 255, .16)',
+    },
+    deco: `<g fill="#dce6fa"><circle cx="90" cy="18" r="1.2"/><circle cx="170" cy="40" r="1"/><circle cx="215" cy="12" r="1.4"/></g>
+<path d="M0 128 Q30 118 60 128 T120 128 T180 128 T240 128 V140 H0 Z" fill="#5aaeff" opacity=".35"/>`,
+  },
+  {
+    id: 'old-paper', name: 'Old Paper', tagline: 'Ivory grain, browned edges, a large first letter like an old book',
+    bg: '#f2e9d6', text: '#3a2f22', accent: '#a5522c', font: "Georgia, 'Times New Roman', serif",
+    vars: {
+      'cds-radius': '3px', 'cds-radius-composer': '4px', 'cds-panel-radius': '4px',
+      'cds-shadow-sm': '0 1px 0 rgba(58, 47, 34, .08)',
+      'cds-shadow-md': '0 1px 0 rgba(58, 47, 34, .08), 0 6px 14px -6px rgba(58, 47, 34, .25)',
+      'cds-shadow-lg': '0 1px 0 rgba(58, 47, 34, .1), 0 12px 24px -8px rgba(58, 47, 34, .3)',
+      'cds-dur-base': '.35s',
+    },
+    deco: `<rect width="240" height="140" rx="10" fill="none" stroke="#8c5f32" stroke-width="10" opacity=".12"/>`,
+  },
+  live('moonlit', 'Moonlit', 'A crescent moon, drifting clouds, twinkling stars',
+    ['#0d1530', '#dbe2f5', '#d9c98f'], 'radial-gradient(120% 90% at 75% 10%, #1a2a5e, #0d1530 60%, #090f24)',
+    'rgba(22, 32, 70, .6)', 'rgba(217, 201, 143, .3)', 'a quiet night to build ☾'),
+  live('clawd', 'Clawd', 'A turning orange spark, drifting embers, Clawd on patrol',
+    ['#1f1714', '#f2e6df', '#d97757'], bands(.04, 'radial-gradient(90% 80% at 70% 30%, #3a2219, #1f1714 55%, #150f0d)'),
+    'rgba(46, 30, 24, .65)', 'rgba(217, 119, 87, .3)', 'what shall we spark today?'),
+  live('cloud-drift', 'Cloud Drift', 'White clouds over a bright sky, birds gliding by',
+    ['#d8ecfa', '#1d3447', '#2f78bd'], bands(.22, 'linear-gradient(#4fa3e8, #86c3f0 55%, #b6dbf6)'),
+    'rgba(255, 255, 255, .6)', 'rgba(47, 120, 189, .3)', 'blue skies ahead'),
+  live('honu-lagoon', 'Honu Lagoon', 'A sea turtle swimming across a lagoon, light rays and bubbles',
+    ['#0f3a44', '#e3f6f2', '#5fd0b8'], bands(.14, 'linear-gradient(#35a6f0, #1d7ad8 45%, #1650b2)'),
+    'rgba(15, 58, 68, .6)', 'rgba(95, 208, 184, .3)', 'swim along, slow and steady'),
+  live('koi-pond', 'Koi Pond', 'Koi circling a pond between lily pads, rings on the water',
+    ['#11332d', '#e4f2ea', '#ef8a4a'], bands(.12, 'linear-gradient(175deg, #4aa08c, #2f8070 50%, #1f6156)'),
+    'rgba(17, 51, 45, .6)', 'rgba(239, 138, 74, .3)', 'still water, clear mind'),
+  live('jellyfish', 'Jellyfish', 'Jellyfish rising through deep water, bells pulsing',
+    ['#0a1830', '#dfe7fb', '#a58cf0'], bands(.07, 'linear-gradient(#174784, #0c2b58 50%, #071a3a)'),
+    'rgba(12, 28, 58, .6)', 'rgba(165, 140, 240, .3)', 'drifting into deep work'),
+  live('lantern-night', 'Lantern Night', 'Paper lanterns drifting down a river at night',
+    ['#0b1424', '#efe6d2', '#f2a541'], 'linear-gradient(#070c1c, #24305e 29%, #0e1a30 30%, #08111f 60%, #050a14)',
+    'rgba(11, 20, 36, .6)', 'rgba(242, 165, 65, .3)', 'let your ideas drift'),
+  live('fireflies', 'Fireflies', 'Fireflies wandering and blinking over tall grass',
+    ['#0b130e', '#e3eedc', '#d8e86a'], bands(.03, 'radial-gradient(120% 80% at 50% 110%, #1b3522, #0c1710 60%, #070c09)'),
+    'rgba(14, 26, 18, .65)', 'rgba(216, 232, 106, .28)', 'a warm glow for late work'),
+  live('neon-rain', 'Neon Rain', 'Rain over a city at night, neon signs buzzing, umbrellas passing by',
+    ['#0c1020', '#e3e8f6', '#ff5fa2'], 'linear-gradient(#05070f, #0b1024 40%, #1e1838 75%, #34203f)',
+    'rgba(12, 16, 32, .6)', 'rgba(255, 95, 162, .3)', 'rain outside, code inside'),
+  ((t: Theme) => ({ ...t, vars: { ...t.vars, 'cds-radius': '10px', 'cds-radius-composer': '18px',
+    'cds-shadow-md': '0 6px 22px rgba(242, 155, 184, .14)' } }))(
+    live('sakura-dusk', 'Sakura Dusk', 'Cherry branches at the corners, petals drifting through a violet evening',
+      ['#231a2e', '#f6e9f0', '#f29bb8'], 'linear-gradient(#17112b, #2a1c44 40%, #523058 72%, #8c4a5e)',
+      'rgba(35, 26, 46, .6)', 'rgba(242, 155, 184, .3)', 'petals at dusk')),
+  live('snow-cabin', 'Snow Cabin', 'A log cabin under snowy peaks, a warm window, smoke curling into falling snow',
+    ['#0e1628', '#e6edf8', '#ffb85c'], 'linear-gradient(#060b18, #101c38 55%, #1c2a4a)',
+    'rgba(14, 22, 40, .6)', 'rgba(255, 184, 92, .3)', 'warm inside, snow outside'),
+  live('star-voyage', 'Star Voyage', 'A little rocket passing a ringed planet, shooting stars overhead',
+    ['#0d0a1f', '#e6ecff', '#ff6fb5'], 'radial-gradient(110% 90% at 85% 20%, #2a1a52, #120d2e 50%, #08061a)',
+    'rgba(16, 12, 40, .6)', 'rgba(255, 111, 181, .3)', 'ready for liftoff?'),
+]
+
+function live(id: string, name: string, tagline: string, [bg, text, accent]: [string, string, string], sky: string,
+  glass: string, rim: string, greet: string): Theme {
+  return {
+    id, name, tagline, bg, text, accent, wallpaper: id,
+    vars: {
+      'cds-radius': '8px', 'cds-radius-composer': '16px', 'cds-panel-radius': '14px',
+      'wall-sky': sky, 'wall-halo': bg, 'wall-glass': glass, 'wall-rim': rim, 'wall-greet': JSON.stringify(greet),
+    },
+  }
+}
+
+function bands(a: number, sky: string) {
+  const w = (k: number) => `rgba(255, 255, 255, ${+(a * k).toFixed(3)})`
+  return `linear-gradient(90deg, ${w(0)} 16%, ${w(1)} 25%, ${w(0)} 35%, ${w(0)} 66%, ${w(.7)} 77%, ${w(0)} 88%), ${sky}`
+}
+
+const mix = (a: string, b: string, k: number) =>
+  '#' + [1, 3, 5].map(i => {
+    const x = parseInt(a.slice(i, i + 2), 16), y = parseInt(b.slice(i, i + 2), 16)
+    return Math.round(x + (y - x) * k).toString(16).padStart(2, '0')
+  }).join('')
+
+const esc = (s: string) => s.replace(/[&<>"]/g, c => `&#${c.charCodeAt(0)};`)
+const px = (v: string | undefined, fallback: number) => (v && /^\d+(\.\d+)?px$/.test(v) ? parseFloat(v) : fallback)
+
+export const preview = (t: Theme) => {
+  const bg = t.bg ?? '#262624', text = t.text ?? '#f5f4ef', accent = t.accent ?? '#d97757'
+  const side = mix(bg, text, .04), bubble = mix(bg, text, .1), muted = mix(text, bg, .55)
+  const font = esc(t.font ?? "'Segoe UI', sans-serif")
+  const r = Math.min(px(t.vars?.['cds-radius'], 6), 11), box = Math.min(px(t.vars?.['cds-radius-composer'], 12), 14)
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="140" viewBox="0 0 240 140">
+<clipPath id="w"><rect width="240" height="140" rx="10"/></clipPath><g clip-path="url(#w)">
+<rect width="240" height="140" fill="${bg}"/>
+<rect width="56" height="140" fill="${side}"/>
+<rect x="9" y="14" width="38" height="6" rx="3" fill="${accent}"/>
+<rect x="9" y="28" width="32" height="5" rx="2.5" fill="${muted}"/>
+<rect x="9" y="39" width="36" height="5" rx="2.5" fill="${muted}"/>
+<rect x="9" y="50" width="26" height="5" rx="2.5" fill="${muted}"/>
+<rect x="148" y="12" width="82" height="22" rx="${r}" fill="${bubble}"/>
+<text x="158" y="27" font-family="${font}" font-size="10" fill="${text}">Hi, Claude!</text>
+<text x="66" y="54" font-family="${font}" font-size="10" fill="${text}">Hi! What shall we make?</text>
+<rect x="66" y="62" width="150" height="5" rx="2.5" fill="${muted}"/>
+<rect x="66" y="72" width="120" height="5" rx="2.5" fill="${muted}"/>
+<rect x="66" y="102" width="164" height="28" rx="${box}" fill="${bubble}" stroke="${mix(bubble, text, .15)}"/>
+<circle cx="216" cy="116" r="8" fill="${accent}"/>
+${t.deco ?? ''}</g>
+</svg>`
+}
+
+// scene: the person's own <id>.js sits beside the file, so a wallpaper named after the theme's own id is kept
+export const parseUserTheme = (json: string, css?: string, scene = false): Theme | undefined => {
+  let t: Record<string, unknown>
+  try { t = JSON.parse(json) } catch { return undefined }
+  const str = (v: unknown, max: number) => typeof v === 'string' && v.length > 0 && v.length <= max
+  const hex = (v: unknown) => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v)
+  if (!t || typeof t !== 'object' || typeof t.id !== 'string' || !/^[a-z][a-z0-9-]{1,40}$/.test(t.id)) return undefined
+  if (!str(t.name, 60) || !hex(t.bg) || !hex(t.text) || !hex(t.accent)) return undefined
+  const vars = Object.fromEntries(Object.entries(t.vars && typeof t.vars === 'object' ? t.vars : {})
+    .filter(([k, v]) => /^[a-z][a-z0-9-]{0,80}$/.test(k) && str(v, 500)))
+  return {
+    id: t.id, name: String(t.name), tagline: str(t.tagline, 200) ? String(t.tagline) : '',
+    wallpaper: scene && t.wallpaper === t.id ? t.id : undefined,
+    bg: String(t.bg), text: String(t.text), accent: String(t.accent),
+    font: str(t.font, 200) ? String(t.font) : undefined, vars,
+    deco: str(t.deco, 40000) ? String(t.deco) : undefined, css: css || undefined,
+  }
+}
+
+export const tile = (t: Theme, on: boolean) => {
+  const ring = on ? `<rect x="2" y="2" width="236" height="136" rx="12" fill="none" stroke="${t.accent ?? '#d97757'}" stroke-width="5"/>` : ''
+  const shot = t.thumb ?? (t.wallpaper && THUMBS[t.wallpaper])
+  if (!shot) return preview(t).replace('</svg>', `${ring}</svg>`)
+  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="140" viewBox="0 0 240 140">
+<clipPath id="w"><rect width="240" height="140" rx="12"/></clipPath>
+<image clip-path="url(#w)" width="240" height="140" preserveAspectRatio="xMidYMid slice" href="${shot}" xlink:href="${shot}"/>${ring}
+</svg>`
+}
