@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-desktop-themes": {
+      "source": { "source": "github", "repo": "0toshigami/claude-desktop-themes" }
+    }
+  },
+  "enabledPlugins": {
+    "themes-for-claude@claude-desktop-themes": true
+  }
+}
