@@ -1,9 +1,9 @@
 ---
-name: themes
-description: Pick one of 12 live ASCII wallpapers (Honu Lagoon, Cloud Drift, Moonlit, Clawd, Koi Pond, Jellyfish, Lantern Night, Fireflies, Neon Rain, Sakura Dusk, Snow Cabin, Star Voyage). Use when the user types /themes or asks for a theme or wallpaper.
+name: wallpapers
+description: Pick one of 12 live ASCII wallpapers (Honu Lagoon, Cloud Drift, Moonlit, Clawd, Koi Pond, Jellyfish, Lantern Night, Fireflies, Neon Rain, Sakura Dusk, Snow Cabin, Star Voyage). Use when the user types /wallpapers or asks for a web wallpaper picker link.
 ---
 
-# /themes
+# /wallpapers
 
 The wallpaper picker is the artifact at https://claude.ai/artifact/9DgZjmfH21XEXFyGn3FbdX (source: `index.html`,
 `wallpapers.js` in this repo; scenes from 0toshigami/claude-desktop-themes, MIT).
